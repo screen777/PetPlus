@@ -1,0 +1,78 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { Upload } from "lucide-react";
+
+export default function PetPlusApp() {
+  const [post, setPost] = useState("");
+
+  return (
+    <div className="p-4 max-w-4xl mx-auto space-y-6">
+      <h1 className="text-4xl font-bold text-center">🐾 PetPlus</h1>
+      <Tabs defaultValue="feed" className="w-full">
+        <TabsList className="grid grid-cols-5">
+          <TabsTrigger value="feed">Rede Social</TabsTrigger>
+          <TabsTrigger value="vets">Veterinários</TabsTrigger>
+          <TabsTrigger value="lost">Pets Perdidos</TabsTrigger>
+          <TabsTrigger value="adoption">Adoção</TabsTrigger>
+          <TabsTrigger value="health">Vacinas</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="feed">
+          <Card>
+            <CardContent className="space-y-4 p-4">
+              <Textarea
+                placeholder="Compartilhe uma foto, vídeo ou história do seu pet..."
+                value={post}
+                onChange={(e) => setPost(e.target.value)}
+              />
+              <Button className="flex items-center gap-2">
+                <Upload size={16} /> Postar
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="vets">
+          <Card>
+            <CardContent className="p-4">
+              <p>Veja os veterinários mais próximos de você.</p>
+              {/* Integração com mapas e geolocalização futura */}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="lost">
+          <Card>
+            <CardContent className="p-4 space-y-4">
+              <p>Divulgue pets perdidos ou veja se alguém encontrou o seu.</p>
+              <Input placeholder="Nome do pet ou local onde foi visto" />
+              <Button>Buscar</Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="adoption">
+          <Card>
+            <CardContent className="p-4 space-y-2">
+              <p>Quer adotar ou doar um pet? Veja aqui os disponíveis.</p>
+              {/* Lista de pets para adoção */}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="health">
+          <Card>
+            <CardContent className="p-4">
+              <p>Prontuário de vacinas do seu pet.</p>
+              {/* Exibição de registros de vacina e possibilidade de upload */}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
